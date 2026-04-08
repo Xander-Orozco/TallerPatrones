@@ -1,5 +1,5 @@
 package main;
-//xander es puto
+
 import factory.VehiculoFactory;
 import inventario.Inventario;
 import modelo.Vehiculo;
