@@ -1,74 +1,87 @@
 package main;
-
+ 
+import java.util.Scanner;
+ 
 import factory.VehiculoFactory;
 import inventario.Inventario;
 import modelo.Vehiculo;
-import modelo.Contrato;
 import builder.ContratoBuilder;
-
+import modelo.Contrato;
+ 
 public class Main {
  
     public static void main(String[] args) {
-
-        Inventario inventario = new Inventario(5);
-
-        Vehiculo v1 = VehiculoFactory.crearVehiculo("auto", "ABC123", 300);
-        Vehiculo v2 = VehiculoFactory.crearVehiculo("van", "DEF456", 250);
-        Vehiculo v3 = VehiculoFactory.crearVehiculo("camion", "GHI789", 200);
-
-        inventario.agregar(v1);
-        inventario.agregar(v2);
-        inventario.agregar(v3);
-
-        System.out.println("=== Inventario ===");
-        inventario.mostrar();
-
-        System.out.println("\n=== Buscar vehículo ===");
-        Vehiculo buscado = inventario.buscarPorPlaca("DEF456");
  
-        if (buscado != null) {
-            System.out.println("Vehículo encontrado: " + buscado.getTipo());
-        } else {
-            System.out.println("Vehículo no encontrado");
+        Scanner scanner = new Scanner(System.in);
+ 
+        System.out.println("=== SISTEMA AUTOCAR ===");
+        System.out.println("Seleccione una opción:");
+        System.out.println("1. Escenario 1 - Inventario");
+        System.out.println("2. Escenario 2 - Contratos");
+        System.out.println("3. Ejecutar todo");
+ 
+        int opcion = scanner.nextInt();
+ 
+        if (opcion == 1 || opcion == 3) {
+ 
+            System.out.println("\n=== ESCENARIO 1: INVENTARIO ===");
+ 
+            Inventario inventario = new Inventario(5);
+ 
+            Vehiculo v1 = VehiculoFactory.crearVehiculo("auto", "ABC123", 300);
+            Vehiculo v2 = VehiculoFactory.crearVehiculo("van", "DEF456", 250);
+            Vehiculo v3 = VehiculoFactory.crearVehiculo("camion", "GHI789", 200);
+ 
+            inventario.agregar(v1);
+            inventario.agregar(v2);
+            inventario.agregar(v3);
+ 
+            inventario.mostrar();
+ 
+            System.out.println("\nBuscar vehículo (DEF456):");
+            Vehiculo buscado = inventario.buscarPorPlaca("DEF456");
+ 
+            if (buscado != null) {
+                System.out.println("Encontrado: " + buscado.getTipo());
+            }
+ 
+            inventario.ordenarPorAutonomia();
+ 
+            System.out.println("\nInventario ordenado:");
+            inventario.mostrar();
         }
-        inventario.ordenarPorAutonomia();
  
-        System.out.println("\n=== INVENTARIO ORDENADO ===");
-        inventario.mostrar();
+        if (opcion == 2 || opcion == 3) {
  
+            System.out.println("\n=== ESCENARIO 2: CONTRATOS ===");
  
-        // ==============================
-        // ESCENARIO 2: CONTRATOS
-        // ==============================
+            Vehiculo v1 = VehiculoFactory.crearVehiculo("auto", "ABC123", 300);
+            Vehiculo v2 = VehiculoFactory.crearVehiculo("van", "DEF456", 250);
  
-        System.out.println("\n=== CREACIÓN DE CONTRATO ===");
+            Contrato contrato = new ContratoBuilder()
+                    .setCliente("Juan Pérez")
+                    .setVehiculo(v1.getPlaca())
+                    .setPlan("Mensual")
+                    .setDuracion(35)
+                    .agregarGPS()
+                    .agregarSeguro()
+                    .build();
  
-        Contrato contrato = new ContratoBuilder()
-                .setCliente("Juan Pérez")
-                .setVehiculo(v1.getPlaca())  // usamos un vehículo del inventario
-                .setPlan("Mensual")
-                .setDuracion(35)
-                .agregarGPS()
-                .agregarSeguro()
-                .build();
+            contrato.mostrar();
  
-        contrato.mostrar();
+            System.out.println("\nSegundo contrato:");
  
+            Contrato contrato2 = new ContratoBuilder()
+                    .setCliente("María López")
+                    .setVehiculo(v2.getPlaca())
+                    .setPlan("Semanal")
+                    .setDuracion(10)
+                    .agregarCargador()
+                    .build();
  
-        // ==============================
-        // INTEGRACIÓN (IMPORTANTE)
-        // ==============================
+            contrato2.mostrar();
+        }
  
-        System.out.println("\n=== INTEGRACIÓN COMPLETA ===");
- 
-        Contrato contrato2 = new ContratoBuilder()
-                .setCliente("María López")
-                .setVehiculo(v2.getPlaca())
-                .setPlan("Semanal")
-                .setDuracion(10)
-                .agregarCargador()
-                .build();
- 
-        contrato2.mostrar();
+        scanner.close();
     }
 }
