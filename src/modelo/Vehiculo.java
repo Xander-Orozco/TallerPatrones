@@ -1,3 +1,5 @@
+package modelo;
+
 public abstract class Vehiculo {
     protected String placa;
     protected double autonomia;

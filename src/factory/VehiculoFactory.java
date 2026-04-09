@@ -1,3 +1,7 @@
+package factory;
+
+import modelo.*;
+
 public class VehiculoFactory {
 
     public static Vehiculo crearVehiculo(String tipo, String placa, double autonomia) {

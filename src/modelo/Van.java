@@ -1,3 +1,5 @@
+package modelo;
+
 public class Van extends Vehiculo {
     public Van(String placa, double autonomia) {
         super(placa, autonomia);

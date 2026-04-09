@@ -1,3 +1,11 @@
+package main;
+
+import factory.VehiculoFactory;
+import inventario.Inventario;
+import modelo.Vehiculo;
+import modelo.Contrato;
+import builder.ContratoBuilder;
+
 public class Main {
  
     public static void main(String[] args) {

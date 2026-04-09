@@ -1,3 +1,7 @@
+package inventario;
+
+import modelo.Vehiculo;
+
 public class Inventario {
     private Vehiculo[] vehiculos;
     private int contador;
