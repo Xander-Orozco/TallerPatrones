@@ -1,5 +1,3 @@
-package modelo;
-
 public class Contrato {
     private String cliente;
     private String plan;
